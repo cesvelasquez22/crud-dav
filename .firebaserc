@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-fire-demo-a82b5": {
+      "hosting": {
+        "crud-dav": [
+          "angular-fire-demo-a82b5"
+        ]
+      }
+    }
+  }
+}
