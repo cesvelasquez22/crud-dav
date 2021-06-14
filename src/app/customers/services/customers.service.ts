@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Customer } from '../models/customer.interface';
+import { CivilState, Customer } from '../models/customer.interface';
 import firebase from 'firebase/app';
 
 @Injectable()
@@ -16,6 +16,18 @@ export class CustomersService {
       map((snapshot) => {
         return snapshot.map((action) => {
           const data = action.payload.doc.data() as Customer;
+          data.uid = action.payload.doc.id;
+          return data;
+        });
+      })
+    )
+  }
+  
+  getCivilStates() {
+    return this.afs.collection('civilStates').snapshotChanges().pipe(
+      map((snapshot) => {
+        return snapshot.map((action) => {
+          const data = action.payload.doc.data() as CivilState;
           data.uid = action.payload.doc.id;
           return data;
         });

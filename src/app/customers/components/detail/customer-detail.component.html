@@ -13,6 +13,8 @@
             <input
                 class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text" placeholder="Código del cliente" formControlName="codigo" />
+            <p *ngIf="customerForm.get('codigo')?.hasError('required') && customerForm.get('codigo')?.dirty"
+                class="text-red-600 leading-tight">Código de cliente es requerido</p>
         </div>
 
         <div class="grid grid-cols-1 mt-5 mx-7">
@@ -20,10 +22,13 @@
             <input
                 class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text" placeholder="Nombre completo" formControlName="nombre" />
+            <p *ngIf="customerForm.get('nombre')?.hasError('required') && customerForm.get('nombre')?.dirty"
+                class="text-red-600 leading-tight">El nombre del cliente es requerido</p>
         </div>
 
         <div class="grid grid-cols-1 mt-5 mx-7">
-            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Fecha de nacimiento</label>
+            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Fecha de
+                nacimiento</label>
             <input
                 class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 (dateInput)="inputBirthDate($event)" formControlName="fechaNacimiento" placeholder="Fecha de nacimiento"
@@ -35,18 +40,19 @@
             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Estado Civil</label>
             <select
                 class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                formControlName="estadoCivil"
-                >
-                <option value="Soltero">Soltero</option>
-                <option value="Casado">Casado</option>
+                formControlName="estadoCivil">
+                <option *ngFor="let state of civilStates" [value]="state.uid">{{ state.name }}</option>
             </select>
+            <p *ngIf="customerForm.get('estadoCivil')?.hasError('required') && customerForm.get('estadoCivil')?.dirty"
+                class="text-red-600 leading-tight">El estado civil del cliente es requerido</p>
         </div>
 
-        <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+        <div class="flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5">
+            <button class="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                routerLink="..">Cancelar</button>
             <button
-                class='w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' routerLink="..">Cancelar</button>
-            <button
-                class='w-auto bg-indigo-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' (click)="save()">Guardar</button>
+                class="w-auto bg-indigo-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2 disabled:opacity-25 disabled:cursor-not-allowed"
+                (click)="save()" [disabled]="customerForm.invalid">Guardar</button>
         </div>
 
     </div>
