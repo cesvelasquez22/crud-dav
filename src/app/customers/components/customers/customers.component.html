@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                        <tr class="border-b border-gray-200 hover:bg-gray-100" *ngFor="let customer of customers" [routerLink]="customer.uid">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100" *ngFor="let customer of customers">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
                                     <span class="font-medium">{{ customer.nombre }}</span>
